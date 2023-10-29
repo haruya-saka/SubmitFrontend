@@ -28,23 +28,17 @@ function App() {
 
   const [selectedDataId, setSelectedDataId] = useState(0)
  
-
-  const [songName, setSongName] = useState(selectData.name);
-  const [artistName, setArtistName] = useState(selectData.artist);
   const selectData = data[selectedDataId];
 
   const videoId = selectData.videoID;
-  //const songName = selectData.name;
+  const songName = selectData.name;
 
-  //const artistName = selectData.artist;
+  const artistName = selectData.artist;
   
   const playerRef = useRef(null)
 
   const nextSong = () => {
     setSelectedDataId((prevIndex) => (prevIndex + 1) % data.length);
-    const nextData = data[(selectedDataId + 1) % data.length];
-    setSongName(nextData.name);
-    setArtistName(nextData.artist);
   };
 
   const backSong = () => {
@@ -56,6 +50,8 @@ function App() {
         return prevIndex - 1;
       }
     });
+  };
+
   const onPlayerReady = (event) => {
     const player = event.target;
     playerRef.current = player;
@@ -112,29 +108,50 @@ function App() {
   };
 
 
-  return (
-    <div style={containerStyle}>
-      <div style={backgroundStyle}></div>
-      <div style={videoContainerStyle}>
-        <YouTube
-          videoId={videoId}
-          onReady={onPlayerReady}
-        />
-      </div>
-      <div style={rectangleStyle}></div>
-      <div style={songdetails}>
-        {/* <p>{songName}/{artistName}</p> */}
-        <p>{songName}</p>
-        <button className="backSongbtn" onClick={backSong}><FontAwesomeIcon icon={faAnglesRight} /></button>
-        <button onClick={nextSong}><FontAwesomeIcon icon={faAnglesRight} /></button>
-      </div>
-      <div style={nextButtonStyle}>
-      </div>
-      <div style={pauseButtonStyle}>
-        <button onClick={onPauseVideo}></button>
-      </div>
+ // ...
+
+ const buttonContainerStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center", // Vertically center the buttons
+  position: "absolute",
+  top: "80%",
+  left: "50%",
+  transform: "translateX(-50%)",
+  zIndex: 1,
+  backgroundPosition: 'center center',
+};
+
+const backButtonStyle = {
+  transform: "rotate(180deg)",
+  fontSize: "24px", // Increase the font size of the button icon
+  marginRight: "300px", // Add some margin to the right to increase spacing
+};
+
+const nextButtonStyle = {
+  fontSize: "24px", // Increase the font size of the button icon
+  marginLeft: "20px", // Add some margin to the left to increase spacing
+};
+
+// ...
+
+return (
+  <div style={containerStyle}>
+    <div style={backgroundStyle}></div>
+    <div style={videoContainerStyle}>
+      <YouTube videoId={videoId} onReady={onPlayerReady} />
     </div>
-  );
+    <div style={rectangleStyle}></div>
+    <div style={songdetails}>
+      {/* <p>{songName}/{artistName}</p> */}
+    </div>
+    <div style={buttonContainerStyle}>
+      <button onClick={backSong} style={backButtonStyle}><FontAwesomeIcon icon={faAnglesRight} /></button>
+      <button onClick={nextSong} style={nextButtonStyle}><FontAwesomeIcon icon={faAnglesRight} /></button>
+    </div>
+  </div>
+);
+
 }
 
 const nextButtonStyle = {
@@ -151,5 +168,6 @@ const pauseButtonStyle = {
   transform: "translateX(-50%)",
   zIndex: -1,
 };
+
 
 export default App;

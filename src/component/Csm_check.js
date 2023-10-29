@@ -44,6 +44,7 @@ const CamCheck = () => {
   
   const sendToBackend = async () => {
     try {
+      console.log(capturedImage)
       // capturedImageをバックエンドに送信
       const response = await axios.post('http://localhost:5000/detect-emo', {
         capturedImage: capturedImage,

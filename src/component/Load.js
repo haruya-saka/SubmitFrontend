@@ -93,15 +93,15 @@ useEffect(() => {
         //setLoading(false);
         setTimeout(() => {
           setLoading(false);
-        }, 6000);
+        },3000);
         //stopAnimation();
         setTimeout(() => {
           stopAnimation();
-        }, 10000);
+        }, 7000);
       // 非同期処理を使用して待機し、処理が完了したら navigate を呼び出す
       setTimeout(() => {
         navigate('/music', { state: { data } });
-      }, 13000);
+      }, 10000);
       })
       .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
