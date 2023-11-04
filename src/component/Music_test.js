@@ -10,22 +10,6 @@ function App() {
   const { data } = location.state;
 
   console.log(data);
-  /*
-  const jsonData = [
-    {
-      name: "specials",
-      artist: "King gne",
-      videoId: "fhzKLBZJC3w",
-      emotion: "joy"
-    },
-    {
-      name: "一途",
-      artist: "King gne",
-      videoId: "hm1na9R2uYA",
-      emotion: "joy"
-    },
-  ]*/
-
   const [selectedDataId, setSelectedDataId] = useState(0)
  
   const selectData = data[selectedDataId];
